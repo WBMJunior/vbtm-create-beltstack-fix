@@ -1,0 +1,18 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.140'
+}
+group = mod_group_id
+version = mod_version
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+repositories {
+    mavenLocal()
+    maven { url = 'https://maven.neoforged.net/releases' }
+}
+neoForge { version = neo_version }
+dependencies {
+    // Create 6.0.10 + its bundled Flywheel/Ponder/Registrate, copied from the pack (git-ignored)
+    compileOnly fileTree(dir: 'libs', include: '*.jar')
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+jar { manifest { attributes(['Implementation-Title': mod_name, 'Implementation-Version': mod_version, 'MixinConfigs': 'vbtm_beltstackfix.mixins.json']) } }

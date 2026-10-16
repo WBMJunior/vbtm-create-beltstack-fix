@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+[[mods]]
+modId="vbtm_beltstackfix"
+version="1.0.0"
+displayName="VBTM Create Belt Stack Fix"
+authors="WBMJunior"
+description='''
+Create 6.0.x belts store whatever ItemStack count they are handed, but vanilla's item codec refuses to
+serialise counts above 99, so one oversized stack on a belt crashes the server the moment that belt syncs
+or saves ("Value must be within range [1;99]"). This jar splits any oversized stack into max-stack-size
+pieces when it enters a belt (logging the producer's stack trace), re-splits stacks mutated in place, and
+clamps the serialised copy as a last resort. Identical jar on client and server.
+'''
+displayTest="IGNORE_ALL_VERSION"
+[[mixins]]
+config="vbtm_beltstackfix.mixins.json"
+[[dependencies.vbtm_beltstackfix]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.0,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.vbtm_beltstackfix]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+ordering="NONE"
+side="BOTH"
+[[dependencies.vbtm_beltstackfix]]
+modId="create"
+type="required"
+versionRange="[6.0.0,)"
+ordering="AFTER"
+side="BOTH"
